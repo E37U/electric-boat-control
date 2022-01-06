@@ -1,3 +1,5 @@
+#E37U
+
 import subsystems.error_log_subsys
 import subsystems.battery_subsys
 import subsystems.solar_subsys
@@ -8,11 +10,11 @@ import modules.configmodule
 
 import time, datetime
 
-modules.configmodule.config.read('config.ini')
-print(modules.configmodule.config.sections())
-print('bit' in modules.configmodule.config.sections())
-print(modules.configmodule.config['Race']['race_length'])
-#TODO Main
+#Examples of how to pull params
+#modules.configmodule.config.read('config.ini')
+#print(modules.configmodule.config.sections())
+#print('bit' in modules.configmodule.config.sections())
+#print(modules.configmodule.config['Race']['race_length'])
 
 class dataHolding():
     time = 0 #TODO Initialize properly

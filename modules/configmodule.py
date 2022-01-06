@@ -1,7 +1,11 @@
+#E37U
+
+#https://docs.python.org/3/library/configparser.html#customizing-parser-behaviour
 import configparser
 
 config = configparser.ConfigParser(allow_no_value=True)
 
+config.optionxform = str
 config.add_section('Position')
 config.set('Position', '# Threshold of distance between position points required to register new distance traveled [feet]')
 config.set('Position', 'distance_traveled_threshold', '20')
@@ -36,6 +40,9 @@ config.set('Battery', 'battery_low_voltage', '1.2')
 config.set('Battery', '# Battery emergency low voltage [volts]')
 config.set('Battery', 'battery_emergency_low_voltage', '1.1')
 
+config.set('Battery', '# End of race reserve [percent]')
+config.set('Battery', 'battery_reserve', '5')
+
 config.add_section('Throttle')
 config.set('Throttle', '# Throttle hard max [percent]')
 config.set('Throttle', 'throttle_hard_max', '100')
@@ -68,6 +75,7 @@ config.set('Error Override', 'c5e_override', 'False')
 
 with open('config.ini', 'w') as configfile:
     config.write(configfile)
+print('We ran!')
 
 #This is how you use this
 #modules.configmodule.config.read('config.ini')
