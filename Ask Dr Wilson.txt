@@ -1,0 +1,4 @@
+Time
+Data logging
+warning logging + terminal warnings (like linux does when booting)
+asyncronous loops, I have multiple loops that need to run at 
