@@ -1,0 +1,1 @@
+https://github.com/fddf22/Preisachmodel/blob/main/preisachmodel.py

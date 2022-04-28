@@ -6,9 +6,9 @@ import configparser
 config = configparser.ConfigParser(allow_no_value=True)
 
 config.optionxform = str
-config.add_section('Position')
-config.set('Position', '# Threshold of distance between position points required to register new distance traveled [feet]')
-config.set('Position', 'distance_traveled_threshold', '20')
+#config.add_section('Position')
+#config.set('Position', '# Threshold of distance between position points required to register new distance traveled [feet]')
+#config.set('Position', 'distance_traveled_threshold', '20')
 
 config.add_section('Loop Times')
 config.set('Loop Times', '# Time between loops [seconds]')
@@ -23,29 +23,31 @@ config.set('Loop Times', 'position_pull_frequency', '10')
 config.set('Loop Times', '# Time between internet data pulls [seconds]')
 config.set('Loop Times', 'internet_pull_frequency', '120')
 
-config.add_section('Model')
-config.set('Model', '# Allowed discrepancy between real and model battery state [HHH UNIT]') #TODO Add units
-config.set('Model', 'allowed_battery_model_discrepancy', '10')
+#config.add_section('Model')
+#config.set('Model', '# Allowed discrepancy between real and model battery state [HHH UNIT]')
+#config.set('Model', 'allowed_battery_model_discrepancy', '10')
 
-config.set('Model', '# Allowed discrepancy between real and model throttle state [HHH UNIT]') #TODO Add units
-config.set('Model', 'allowed_throttle_model_discrepancy', '10')
+#config.set('Model', '# Allowed discrepancy between real and model throttle state [HHH UNIT]')
+#config.set('Model', 'allowed_throttle_model_discrepancy', '10')
 
-config.set('Model', '# Allowed discrepancy between real and model solar [HHH UNIT]') #TODO Add units and elaborate
-config.set('Model', 'allowed_solar_model_discrepancy', '10')
+#config.set('Model', '# Allowed discrepancy between real and model solar [HHH UNIT]')
+#config.set('Model', 'allowed_solar_model_discrepancy', '10')
 
 config.add_section('Battery')
 config.set('Battery', '# Battery desired low voltage [volts]')
 config.set('Battery', 'battery_low_voltage', '1.2')
 
-config.set('Battery', '# Battery emergency low voltage [volts]')
-config.set('Battery', 'battery_emergency_low_voltage', '1.1')
+#config.set('Battery', '# Battery emergency low voltage [volts]')
+#config.set('Battery', 'battery_emergency_low_voltage', '1.1')
 
 config.set('Battery', '# End of race reserve [percent]')
-config.set('Battery', 'battery_reserve', '5')
+config.set('Battery', 'battery_reserve', '.05')
 
 config.add_section('Throttle')
 config.set('Throttle', '# Throttle hard max [percent]')
-config.set('Throttle', 'throttle_hard_max', '100')
+config.set('Throttle', 'throttle_hard_max', '1')
+config.set('Throttle', '# Throttle Bump Margin [percent]')
+config.set('Throttle', 'throttle_bump_margin', '1')
 
 config.set('Throttle', '# Motor amp max [amps]')
 config.set('Throttle', 'motor_amp_max', '200')
