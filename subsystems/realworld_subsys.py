@@ -6,7 +6,7 @@ import time
 
 currentPosition = [0,0]
 distanceTraveled = 0
-internalSpeed = 0
+internalSpeed = 1
 lastPullTime = 0
 
 def getPosition():
@@ -16,11 +16,16 @@ def getPosition():
     return [a,b]
 
 def setStartPosition():
+    global currentPosition
     # Pull position and initialize it
     currentPosition = getPosition()
     return
 
 def addPositionToDistance():
+    global currentPosition
+    global distanceTraveled
+    global internalSpeed
+    global lastPullTime
     # When this is called, pull position and then calculate distance from last position, then add to total, also calculate speed
     currentTime = time.time()
     timeDiff = (currentTime - lastPullTime) /3600 # Time difference will be in hours
@@ -47,7 +52,10 @@ def setThrottle(input): # convert percentage throttle to physical output
     return
 
 class dataPull(): #TODO Strawman
+    global internalSpeed
+    global distanceTraveled
     batteryVoltage =  54.1 #TODO
     motorCurrent  = 100.17 #TODO
     position = getPosition()
     speed = internalSpeed
+    distance = distanceTraveled

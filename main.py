@@ -84,7 +84,7 @@ subsystems.error_log_subsys.initialChecks()
 
 # command line go wait
 
-input("Press any key to start race system. NOTE: Motor will start upon trigger")
+input("Press any key to start race system. NOTE: Motor will start upon trigger: ")
 
 # Set full throttle
 subsystems.motor_subsys.setThrottle(1.0)
@@ -96,3 +96,5 @@ subsystems.realworld_subsys.setStartPosition()
 # Loop!
 while(subsystems.realworld_subsys.distanceTraveled < float(modules.configmodule.config['Race']['race_length'])):
     mainControlLoop()
+    time.sleep(1)
+    print("SOC: " + str(float(subsystems.battery_subsys.voltageToSOC(subsystems.realworld_subsys.dataPull.batteryVoltage) * 100)) + "% | Voltage: "+ str(subsystems.realworld_subsys.dataPull.batteryVoltage) + "V | Distance Traveled: " + str(subsystems.realworld_subsys.dataPull.distance) + " Miles")

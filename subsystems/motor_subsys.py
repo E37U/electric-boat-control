@@ -6,9 +6,11 @@ import modules.configmodule
 
 throttleValue = 0
 throttleMax = float(modules.configmodule.config['Throttle']['throttle_hard_max'])
+motorAmp = 0
 
-#class dataPull(): DEFUNCT
-#    motorCurrent = 200 DEFUNCT 
+class dataPull():
+    global motorAmp
+    motorCurrent = motorAmp 
 
 def setThrottle(input):
     #TODO PRACTICALLY OUTPUT set throttle to said input
@@ -31,9 +33,12 @@ def bumpThrottleUp():
         setThrottle(newInput)
 
 def setThrottleAmp(input): #Sets the throttle from a specific amperage rather than a percent)
+    global motorAmp
     if input < float(modules.configmodule.config['Throttle']['motor_amp_max']):
+        motorAmp = input
         setThrottle(ampToPercent(input))
     else:
+        motorAmp = float(modules.configmodule.config['Throttle']['motor_amp_max'])
         setThrottle(ampToPercent(float(modules.configmodule.config['Throttle']['motor_amp_max'])))
     return
 

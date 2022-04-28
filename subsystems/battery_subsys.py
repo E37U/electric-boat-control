@@ -73,7 +73,7 @@ for i in reversed(range(int(100 * deltaAlpha),100+int(100 * deltaAlpha),int(100 
 
 
 def relayReturn(alpha,beta,input):
-    print(relaySystemDict[alpha][beta].paramString())
+    #print(relaySystemDict[alpha][beta].paramString())
     return relaySystemDict[alpha][beta].pullVal(input)
 
 def branchReturn(list1, list2):

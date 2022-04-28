@@ -50,8 +50,7 @@ def class1Error():
     sys.exit("Class 1 Error")
 def class2Error():
     # Real World Failure
-    if modules.configmodule.config['Error Override']['c2e_override'] == True:
-        print("Class 2 Error OVERRIDE")
+    if bool(modules.configmodule.config['Error Override']['c2e_override']) == True:
         return
     sleepTime = modules.configmodule.config['Errors']['c2e_timout']
     print("Class 2 Error: Real world failure, check physicals")
@@ -61,24 +60,22 @@ def class2Error():
     return
 def class3Error():
     # Large discrepancy
-    if modules.configmodule.config['Error Override']['c3e_override'] == True:
-        print("Class 3 Error OVERRIDE")
+    if bool(modules.configmodule.config['Error Override']['c3e_override']) == True:
         return
-    print("Class 3 Error: Large model discrepancy")
-    return
+    else:
+        print("Class 3 Error: Large model discrepancy")
+        return
 
-def class3Error(): ##DEPRECIATED
+def class4Error(): ##DEPRECIATED
     # Internet Failure
-    if modules.configmodule.config['Error Override']['c4e_override'] == True:
-        print("Class 4 Error OVERRIDE")
+    if bool(modules.configmodule.config['Error Override']['c4e_override']) == True:
         return
     print("Class 4 Error: Internet failure")
     return
 
 def class5Error():
     # Pessimistic Model
-    if modules.configmodule.config['Error Override']['c5e_override'] == True:
-        print("Class 5 Error OVERRIDE")
+    if bool(modules.configmodule.config['Error Override']['c5e_override']) == True:
         return
     print("Class 5 Error: Pessimistic Model")
     return

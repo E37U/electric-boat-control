@@ -66,7 +66,7 @@ config.set('Error Override', '# Class 2 error hard override [bool]')
 config.set('Error Override', 'c2e_override', 'False')
 
 config.set('Error Override', '# Class 3 error hard override [bool]')
-config.set('Error Override', 'c3e_override', 'False')
+config.set('Error Override', 'c3e_override', 'True')
 
 config.set('Error Override', '# Class 4 error hard override [bool]')
 config.set('Error Override', 'c4e_override', 'False')
