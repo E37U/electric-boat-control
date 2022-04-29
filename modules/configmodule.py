@@ -12,16 +12,8 @@ config.optionxform = str
 
 config.add_section('Loop Times')
 config.set('Loop Times', '# Time between loops [seconds]')
-config.set('Loop Times', 'main_loop_frequency', '30')
+config.set('Loop Times', 'main_loop_frequency', '1')
 
-config.set('Loop Times', '# Time between real world data pulls (except positional data) [seconds]')
-config.set('Loop Times', 'real_world_pull_frequency', '30')
-
-config.set('Loop Times', '# Time between positional data pulls [seconds]')
-config.set('Loop Times', 'position_pull_frequency', '10')
-
-config.set('Loop Times', '# Time between internet data pulls [seconds]')
-config.set('Loop Times', 'internet_pull_frequency', '120')
 
 #config.add_section('Model')
 #config.set('Model', '# Allowed discrepancy between real and model battery state [HHH UNIT]')

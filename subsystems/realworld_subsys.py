@@ -9,10 +9,16 @@ distanceTraveled = 0
 internalSpeed = 1
 lastPullTime = 0
 
+
+#NOTE Since this needs to be able to run on a desktop machine, pulls to the GPIO bus and GPS are left out because the program will not run without the hardware being present
+#In place of these calls, stawman calls to pointless but correctly typed data are placed so the program can run
+
 def getPosition():
-    #TODO this function returns the current position as a tuple of latitude and longitude, if it can't find position, return null
-    a = 1 #TODO strawman
-    b = 1 #TODO strawman
+    #This function returns the current position as a tuple of latitude and longitude
+    #Depending on the type of GPS used, the calls here will be VERY different but the important part is that lat and lon are  returned as decomal values
+    #See note above for strawman explanation
+    a = 1 #NOTE strawman, Latitude (decimal)
+    b = 1 #NOTE strawman, Longitude (decimal)
     return [a,b]
 
 def setStartPosition():
@@ -32,7 +38,7 @@ def addPositionToDistance():
     distance = 0
     lastPosition = currentPosition
     currentPosition = getPosition()
-    #From https://www.geeksforgeeks.org/program-distance-two-points-earth/#:~:text=For%20this%20divide%20the%20values,is%20the%20radius%20of%20Earth.
+    #Distance calculation from https://www.geeksforgeeks.org/program-distance-two-points-earth/#:~:text=For%20this%20divide%20the%20values,is%20the%20radius%20of%20Earth.
     radLastPosition = [radians(lastPosition[0]), radians(lastPosition[1])]
     radCurrentPosition = [radians(currentPosition[0]), radians(currentPosition[1])]
 
@@ -48,14 +54,14 @@ def addPositionToDistance():
     return
 
 def setThrottle(input): # convert percentage throttle to physical output
-    #TODO either PWM or some value, idk, just set it.
+    #NOTE Strawman
     return
 
-class dataPull(): #TODO Strawman
+class dataPull():
     global internalSpeed
     global distanceTraveled
-    batteryVoltage =  54.1 #TODO
-    motorCurrent  = 100.17 #TODO
+    batteryVoltage =  54.1 #NOTE Strawman
+    motorCurrent  = 100.17 #NOTE Strawman
     position = getPosition()
     speed = internalSpeed
     distance = distanceTraveled

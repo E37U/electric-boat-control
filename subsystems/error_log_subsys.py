@@ -1,19 +1,14 @@
 #E37U
 
-import logging
-
 from sqlalchemy import null
 import subsystems.error_log_subsys
 import subsystems.battery_subsys
-import subsystems.solar_subsys
 import subsystems.realworld_subsys
 import subsystems.motor_subsys
 import sys
 import time
 
 import modules.configmodule
-#logging.critical('Watch out!')  # will print a message to the console
-#logging.warning('I told you so')  # will not print anything
 
 
 def errorComparator(input):
@@ -25,18 +20,17 @@ def errorComparator(input):
     modelBatterySOC = input.model.batterySOC
     modelMotorCurrent  = input.model.motorCurrent
 
-    #throttleMax = modules.configmodule.config['Throttle']['throttle_hard_max']
     motorCurrentMax = float(modules.configmodule.config['Throttle']['motor_amp_max'])
     batteryVoltageMin = float(modules.configmodule.config['Battery']['battery_low_voltage'])
-    if realMotorCurrent > motorCurrentMax:
+    if realMotorCurrent > motorCurrentMax: #Check for motor tollerances
         class3Error()
         return
-    if realBatteryVoltage > batteryVoltageMin:
+    if realBatteryVoltage > batteryVoltageMin: #Check for battery tolerances
         class3Error()
         return
     return
 
-def initialChecks():
+def initialChecks(): #bootup checks
     batteryV = subsystems.realworld_subsys.dataPull.batteryVoltage
     position = subsystems.realworld_subsys.dataPull.position
     if batteryV > 0 and position != null:
@@ -44,6 +38,9 @@ def initialChecks():
     else:
         class2Error()
         return
+
+
+#Error codes
 
 def class1Error():
     # Major System Failure

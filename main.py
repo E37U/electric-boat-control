@@ -2,7 +2,6 @@
 
 import subsystems.error_log_subsys
 import subsystems.battery_subsys
-import subsystems.solar_subsys
 import subsystems.realworld_subsys
 import subsystems.motor_subsys
 
@@ -16,7 +15,7 @@ import time, datetime
 #print('bit' in modules.configmodule.config.sections())
 #print(modules.configmodule.config['Race']['race_length'])
 
-class dataHolding():
+class dataHolding(): #This is an easy way to pull together all the data at once every time the main control loop runs
     time = 0
     class real():
         batteryVoltage = 0
@@ -49,7 +48,7 @@ def mainControlLoop():
     # Run error/log sub system
     subsystems.error_log_subsys.errorComparator(freezeData)
 
-    # Decide if throttle correction is required
+    ## Decide if throttle correction is required
     distanceRemaining = float(modules.configmodule.config['Race']['race_length']) - subsystems.realworld_subsys.distanceTraveled
 
     #Check how much harder we can push, if we can push harder, then give a bump and check results
@@ -73,7 +72,7 @@ def mainControlLoop():
             energyNeeded = remainingTime * subsystems.realworld_subsys.dataPull.motorCurrent # In Ah
             if ((subsystems.battery_subsys.voltageToSOC(subsystems.realworld_subsys.dataPull.batteryVoltage) * 280)- float(modules.configmodule.config['Battery']['battery_reserve'])) >= energyNeeded:
                 satisfied = True
-            if subsystems.motor_subsys.throttleValue == 0:
+            if subsystems.motor_subsys.throttleValue == 0: #This means we've gon to such a low throttle that we can't go any lower and still complete the race
                 subsystems.error_log_subsys.class5Error()
 
 
@@ -93,8 +92,8 @@ subsystems.motor_subsys.setThrottle(1.0)
 #Set beginning Position
 subsystems.realworld_subsys.setStartPosition()
 
-# Loop!
-while(subsystems.realworld_subsys.distanceTraveled < float(modules.configmodule.config['Race']['race_length'])):
+# Run the Loop!
+while(subsystems.realworld_subsys.distanceTraveled < float(modules.configmodule.config['Race']['race_length'])): #While the race isn't finished
     mainControlLoop()
-    time.sleep(1)
+    time.sleep(float(modules.configmodule.config['Loop Times']['main_loop_frequency'])) #Loop is spaced out as specified in config file
     print("SOC: " + str(float(subsystems.battery_subsys.voltageToSOC(subsystems.realworld_subsys.dataPull.batteryVoltage) * 100)) + "% | Voltage: "+ str(subsystems.realworld_subsys.dataPull.batteryVoltage) + "V | Distance Traveled: " + str(subsystems.realworld_subsys.dataPull.distance) + " Miles")
