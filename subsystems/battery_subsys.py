@@ -78,11 +78,11 @@ def relayReturn(alpha,beta,input):
 def branchReturn(list1, list2): #We need to convert the branch data to an array to be handled by the FinDIff package, later its converted back into dictonary data
     branchArray = np.zeros((list1.size,list2.size))
     for i in range(int(list1.size)):
-        print('ii: ' +str(list1[i]))
+        #print('ii: ' +str(list1[i]))
         for j in range(0,i+np.abs(list1.size-list2.size)+1):
-            print('j: ' +str(list2[j]))
+            #print('j: ' +str(list2[j]))
             branchArray[i,j] = branchDict[list1[i]][list2[j]]
-            print(branchArray[i,j])
+            #print(branchArray[i,j])
 
     #for i in reversed(range(int(100 * (list1[1]-list1[0])),100+int(100 * (list1[1]-list1[0])),int(100 * (list1[1]-list1[0])))):
     #    print("Weight: " + str(i/100)) 
@@ -90,7 +90,7 @@ def branchReturn(list1, list2): #We need to convert the branch data to an array 
     return branchArray
 
 # Weight Function Computation
-print(branchDict[.5][.5])
+#print(branchDict[.5][.5])
 
 
 # Adapted from example code from package docs: https://findiff.readthedocs.io/en/latest/source/examples-basic.html

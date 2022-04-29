@@ -92,6 +92,7 @@ subsystems.motor_subsys.setThrottle(1.0)
 #Set beginning Position
 subsystems.realworld_subsys.setStartPosition()
 
+print("Ignore message below, the model is warming up. We cannot disable the warning") #There is a warning while the model is warming up about the root finding package not iterating, once the model warms up it goes away but I can't override the message so this lets the user know everything is all good
 # Run the Loop!
 while(subsystems.realworld_subsys.distanceTraveled < float(modules.configmodule.config['Race']['race_length'])): #While the race isn't finished
     mainControlLoop()
