@@ -3,6 +3,8 @@
 from math import radians, cos, sin, asin, sqrt
 import time
 
+#import pynmea2 #Import for GPS
+#import RPI.GPIO as GPIO #Import for raspberry pi, commented out for running on desktops
 
 currentPosition = [0,0]
 distanceTraveled = 0
@@ -10,13 +12,17 @@ internalSpeed = 1
 lastPullTime = 0
 
 
-#NOTE Since this needs to be able to run on a desktop machine, pulls to the GPIO bus and GPS are left out because the program will not run without the hardware being present
-#In place of these calls, stawman calls to pointless but correctly typed data are placed so the program can run
 
 def getPosition():
     #This function returns the current position as a tuple of latitude and longitude
     #Depending on the type of GPS used, the calls here will be VERY different but the important part is that lat and lon are  returned as decomal values
-    #See note above for strawman explanation
+    #One such device is a USB Serial based NMEA GPS receiver. This uses NMEA0183 to send messages with data about position which can be called into our code with a library called pynmea2
+    #We can use this library to parse messages given by the receiver, I've listed the code to do so below, note that the import is commented out in the file header because this code will only run on a raspberry pi
+    #Citation for NMEA code: https://python.plainenglish.io/receiving-and-processing-gps-data-using-external-receiver-with-python-24d3592ad2e0
+    ##message = open("gps_data_20220429-100657.nmea", "rb") #This file will be created by the NMEA datastream, thsi file will look like this (note the date and time) but with a path in /dev/
+    ##gga = pynmea2.parse(message)
+    ##a = gga.latitude  #replace strawman
+    ##b = gga.longitude #replace strawman
     a = 1 #NOTE strawman, Latitude (decimal)
     b = 1 #NOTE strawman, Longitude (decimal)
     return [a,b]
@@ -53,8 +59,18 @@ def addPositionToDistance():
     lastPullTime = currentTime
     return
 
+#Below is the code for running the GPIO PWM output, it is commented out to run on desktops as it can only run on a raspberry pi. For integration, uncomment
+#Citation: https://sourceforge.net/p/raspberry-gpio-python/wiki/PWM/
+##GPIO.setmode(GPIO.BOARD)
+##GPIO.setup(12, GPIO.OUT) #PWM Output
+##GPIO.setup(9, GPIO.IN) #Battery Voltage In
+##GPIO.setup(10, GPIO.IN) # Motor Current In
+##pwm = GPIO.PWM(1, 30000) #start GPIO pin
+##pwm.start(0.0) #Set to 0
+
 def setThrottle(input): # convert percentage throttle to physical output
-    #NOTE Strawman
+    ##global pwm
+    ##pwm.ChangeDutyCycle(input)
     return
 
 class dataPull():
@@ -62,6 +78,8 @@ class dataPull():
     global distanceTraveled
     batteryVoltage =  54.1 #NOTE Strawman
     motorCurrent  = 100.17 #NOTE Strawman
+    #batteryVoltage =  GPIO.input(9) #NOTE Real code commented out while running on desktop, when running on raspberry pi, replace strawman
+    #motorCurrent  = GPIO.input(10) #NOTE Real code commented out while running on desktop, when running on raspberry pi, replace strawman
     position = getPosition()
     speed = internalSpeed
     distance = distanceTraveled
