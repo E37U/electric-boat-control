@@ -46,4 +46,4 @@ def setThrottleAmp(input): #Sets the throttle from a specific amperage rather th
     return
 
 def ampToPercent(input): # Translates amperage to percentage throttle (motor model)
-    return 0 #TODO implement
+    return (input /120)
